@@ -1,0 +1,46 @@
+Aplicacao Servidor
+java -jar Aplicacao/MainServer.jar 9007 9006 9008 9009
+
+Aplicacao Cliente
+java -jar Aplicacao/MainClient.jar 8007 8006 8008 8009
+
+Transporte Servidor
+Transporte/TransporteServidor/transporteservidor 9005 9004 9006 9007
+
+Transporte Cliente
+Transporte/TransporteCliente/transportecliente 8005 8004 8006 8007
+
+Fisica Servidor
+perl mainServer.pl 127.0.0.1 8002 8003 127.0.0.1 9004 9005
+
+Fisica Cliente
+perl mainClient.pl 127.0.0.1 8003 8002 127.0.0.1 8004 8005
+
+
+Server
+Aplicacao
+	O 9008R 9009S
+	U 9007R 9006S
+
+Tansporte
+	O 9006R 9007S
+	U 9005R 9004S
+
+Fisica
+	O 9004R 9005S
+	U 8002R 8003S
+
+=====================
+
+Client
+Aplicacao
+	O 8008R 8009S
+	U 8007R 8006S
+
+Tansporte
+	O 8006R 8007S
+	U 8005R 8004S
+
+Fisica
+	O 8004R 8005S
+	U 8003R 8002S

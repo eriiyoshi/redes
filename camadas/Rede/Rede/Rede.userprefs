@@ -1,0 +1,13 @@
+﻿<Properties StartupConfiguration="{ADABAE30-C3FB-442C-B0DF-330DF85EF679}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Rede/Program.cs">
+    <Files>
+      <File FileName="Rede/Program.cs" Line="13" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

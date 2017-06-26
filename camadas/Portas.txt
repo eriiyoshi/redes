@@ -1,0 +1,28 @@
+Server
+Aplicacao
+	O 9008R 9009S
+	U 9007R 9006S
+
+Tansporte
+	O 9006R 9007S
+	U 9005R 9004S
+
+Fisica
+	O 9004R 9005S
+	U 8002R 8003S
+
+=====================
+
+Client
+Aplicacao
+	O 8008R 8009S
+	U 8007R 8006S
+
+Tansporte
+	O 8006R 8007S
+	U 8005R 8004S
+
+Fisica
+	O 8004R 8005S
+	U 9002R 9003S
+
