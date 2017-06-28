@@ -43,3 +43,6 @@ void LayerSocket::close(){
     
 }
 
+void LayerSocketTCP::formatMessage(int type, int sourcePort, int destinationPort, int window, char* message, char* binaryMessage){
+    
+}

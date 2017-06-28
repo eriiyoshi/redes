@@ -67,3 +67,7 @@ void LayerSocketUDP::close(){
     ::close(socketSenderFD);
     ::close(socketReceiverFD);
 }
+
+void LayerSocketTCP::formatMessage(int type, int sourcePort, int destinationPort, char* message, char* binaryMessage){
+    
+}

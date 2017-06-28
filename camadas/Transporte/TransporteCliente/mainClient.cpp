@@ -64,8 +64,29 @@ int main(int argc, char** argv) {
     printf("\nEstabelecendo conexão com a porta %d", underPortSender);
     layer01->initUnderSender();
     printf("\nConcluido");
+
+    //-------------------------------------------------------------------
     
+    layer01->receiveFromOver(buffer);
+    
+    char mensagem[10000];
+    
+    // SYN
+    layer01->getUnder()->formatMessage(1, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, "", mensagem);
+    
+    layer01->sendToUnder(mensagem);
+   
+    // SYN-ACK
     layer01->receiveFromUnder(buffer);
+    
+    // Mensagem
+    layer01->getUnder()->formatMessage(0, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, "", mensagem);
+    
+    layer01->sendToUnder(mensagem);
+   
+    // SYN-ACK
+    layer01->receiveFromUnder(buffer);
+    
     
     printf("\nMAIN->Recebido: %s", buffer);
     sprintf(buffer, "");

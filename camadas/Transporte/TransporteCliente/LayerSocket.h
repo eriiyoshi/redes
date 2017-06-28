@@ -33,6 +33,7 @@ public:
     virtual int receive(char* buffer);
     virtual void send(char* message);
     virtual void close();
+    virtual void formatMessage(int type, int sourcePort, int destinationPort, int window, char* message, char* binaryMessage);
     
     static int LIMIT;
 protected:
@@ -44,6 +45,9 @@ protected:
     
     int socketReceiverFD;
     int socketSenderFD;
+    
+
+
         
 };
 

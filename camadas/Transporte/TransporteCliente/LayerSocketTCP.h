@@ -37,7 +37,8 @@ public:
     void close();
     
     static int LIMIT;
-private:
+protected:
+    void formatMessage(int type, int sourcePort, int destinationPort, char* message, char* binaryMessage);
 /*    int portSender;
     int portReceiver;
     
