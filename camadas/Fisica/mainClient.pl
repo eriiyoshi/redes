@@ -41,13 +41,21 @@ print 'Destination IP: '.$layer01->getUnderIPSender."\n";
 
 sleep(3);
 
-#$length = $layer01->sendToUnder("Mensagem 01");
-$length = $layer01->sendToUnder(
-              Functions->createFrame(
-                  "Mensagem 01",
-                  $layer01->getUnderMACSender,
-                  $layer01->getUnderMACReceiver));
+while(1){
 
-#$length = $layer01->sendToOver("Mensagem 02");
+  $buffer = $layer01->receiveFromOver() or last;
 
+  #$length = $layer01->sendToUnder("Mensagem 01");
+
+  my $frame = Functions->createFrame(
+      $buffer,
+      $layer01->getUnderMACSender,
+      $layer01->getUnderMACReceiver
+  );
+  Functions->printFrame($frame);
+  $length = $layer01->sendToUnder($frame);
+
+  #$length = $layer01->sendToOver("Mensagem 02");
+
+}
 $layer01->close();

@@ -5,7 +5,7 @@ Aplicacao Cliente
 java -jar Aplicacao/MainClient.jar 8007 8006 8008 8009
 
 Transporte Servidor
-Transporte/TransporteServidor/transporteservidor 9005 9004 9006 9007
+Transporte/TransporteServidor/transporteservidor 9005 9004 9006 9007 512
 
 Transporte Cliente
 Transporte/TransporteCliente/transportecliente 8005 8004 8006 8007

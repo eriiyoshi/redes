@@ -180,4 +180,18 @@ sub createFrame {
 	return $frame;
 }
 
+sub getDataFromFrame {
+	my $frame = $_[1];
+  my $dataLength = length($frame)-176-32;
+
+	my $preamble = substr $frame, 0, 64; #Bin2Dec(substr $frame, 0, 64);
+	my $destinationMAC = Bin2MAC(substr $frame, 64, 48);
+	my $sourceMAC = Bin2MAC(substr $frame, 112, 48);
+	my $etherType = Bin2Dec(substr $frame, 160, 16);
+	my $data = Bin2Asc(substr $frame, 176, $dataLength);
+	my $fcs = Bin2Dec(substr $frame, 176+$dataLength, 32);
+
+	return $data;
+}
+
 1;

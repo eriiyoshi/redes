@@ -63,7 +63,7 @@ public class MainClient {
             //layer01 = new Layer(8007, 8006, 8008, 8008);
             layer01 = new Layer(underPortReceiver, underPortSender, overPortReceiver, overPortSender);
                         
-            System.out.println("Estabelecendo conexão na porta " + overPortSender);            
+            System.out.println("Estabelecendo conexão na porta " + underPortReceiver);            
             layer01.initUnderReceiver();
             System.out.println("Conexão estabelecida");
             

@@ -40,6 +40,8 @@ public:
     void initOverSender();
     void initUnderReceiver();
     void initUnderSender();
+    LayerSocket* getOver();
+    LayerSocket* getUnder();
     
     static int LIMIT;
     static int TCP;

@@ -68,26 +68,39 @@ int main(int argc, char** argv) {
     //-------------------------------------------------------------------
     
     layer01->receiveFromOver(buffer);
+    printf("Mensagem recebida: %s", buffer);
     
     char mensagem[10000];
+    char bufferAux[10000];
     
     // SYN
     layer01->getUnder()->formatMessage(1, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, "", mensagem);
-    
+    layer01->getUnder()->printMessage(mensagem);
+    // TODO: Tratar falha no envio
     layer01->sendToUnder(mensagem);
    
     // SYN-ACK
-    layer01->receiveFromUnder(buffer);
+    layer01->receiveFromUnder(bufferAux);
+    layer01->getUnder()->printMessage(bufferAux);
     
+    // Envio
     // Mensagem
-    layer01->getUnder()->formatMessage(0, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, "", mensagem);
-    
+    // TODO: Dividir de acordo com window
+    layer01->getUnder()->formatMessage(0, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, buffer, mensagem);
+    // TODO: Tratar falha no envio    
     layer01->sendToUnder(mensagem);
-   
-    // SYN-ACK
+       
+    // ACK
+    layer01->receiveFromUnder(bufferAux);
+    
+    // Recebimento
+    // Mensagem
     layer01->receiveFromUnder(buffer);
+    char data[10000];
+    layer01->getUnder()->getDataFromMessage(buffer, data);
+    layer01->sendToOver(data);
     
-    
+    /*
     printf("\nMAIN->Recebido: %s", buffer);
     sprintf(buffer, "");
     
@@ -98,7 +111,7 @@ int main(int argc, char** argv) {
     layer01->sendToOver("Mensagem 02");
 
     printf("\nMAIN->Recebido: %s", buffer);
-
+    */
     
     layer01->close();
         

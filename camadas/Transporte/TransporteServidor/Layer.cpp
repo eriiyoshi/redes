@@ -111,3 +111,11 @@ void Layer::initUnderReceiver(){
 void Layer::initUnderSender(){
     under->initSender();
 }
+
+LayerSocket* Layer::getOver(){
+    return over;
+}
+
+LayerSocket* Layer::getUnder(){
+    return under;
+}

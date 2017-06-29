@@ -41,9 +41,14 @@ print 'Source IP: '.$layer02->getUnderIPReceiver."\n";
 print 'Destination MAC: '.$layer02->getUnderMACSender."\n";
 print 'Destination IP: '.$layer02->getUnderIPSender."\n";
 
-$buffer = $layer02->receiveFromUnder();
-Functions->printFrame($buffer);
-#$buffer = $layer02->receiveFromOver();
-#Functions->printFrame($buffer);
+while(1){
 
+  $buffer = $layer02->receiveFromUnder() or last;
+  Functions->printFrame($buffer);
+  $buffer = Functions->getDataFromFrame($buffer);
+  $layer02->sendToOver($buffer);
+  #$buffer = $layer02->receiveFromOver();
+  #Functions->printFrame($buffer);
+
+}
 $layer02->close();

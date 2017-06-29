@@ -33,7 +33,10 @@ public:
     virtual int receive(char* buffer);
     virtual void send(char* message);
     virtual void close();
-    
+    virtual void formatMessage(int type, int sourcePort, int destinationPort, int window, char* message, char* binaryMessage);
+    virtual void printMessage(char* message);
+    virtual void getDataFromMessage(char* message, char* data);
+
     static int LIMIT;
 protected:
     int portSender;
@@ -44,7 +47,12 @@ protected:
     
     int socketReceiverFD;
     int socketSenderFD;
-        
+    
+    static void toBin(int number, int num_bits, char* binary);
+    static void toBin(char* data, char* binary);
+    static int toInt(char* binary);
+    static void toChar(char* binary, char* str);
+            
 };
 
 #endif /* LAYERSOCKET_H */

@@ -42,7 +42,38 @@ void LayerSocket::send(char* message){
 void LayerSocket::close(){
     
 }
-
-void LayerSocketTCP::formatMessage(int type, int sourcePort, int destinationPort, int window, char* message, char* binaryMessage){
+/*
+void LayerSocket::formatMessage(int type, int sourcePort, int destinationPort, int window, char* message, char* binaryMessage){
     
 }
+
+void LayerSocket::printMessage(char* message){
+    
+    
+}
+
+void LayerSocket::getDataFromMessage(char* message, char* data){
+    
+    
+}
+
+void LayerSocket::toBin(int number, int num_bits, char* binary){
+      
+}
+
+void LayerSocket::toBin(char* data, char* binary){
+    
+    
+    
+}
+
+int LayerSocket::toInt(char* binary){
+    
+    
+    
+}
+
+void LayerSocket::toChar(char* binary, char* str){
+    
+    
+}*/

@@ -38,7 +38,9 @@ public:
     
     static int LIMIT;
 protected:
-    void formatMessage(int type, int sourcePort, int destinationPort, char* message, char* binaryMessage);
+    //void formatMessage(int type, int sourcePort, int destinationPort, char* message, char* binaryMessage);
+    //void printMessage(char* message);
+    //void getDataFromMessage(char* message, char* data);
 /*    int portSender;
     int portReceiver;
     

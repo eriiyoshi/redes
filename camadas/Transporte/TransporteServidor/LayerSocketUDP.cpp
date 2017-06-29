@@ -19,9 +19,9 @@ LayerSocketUDP::LayerSocketUDP(int portReceiver, int portSender) {
     this->portReceiver = portReceiver;
     this->portSender = portSender;
 
-    printf("Inicializando recebimento na porta %d\n",portReceiver);        
-    initReceiver();
-    printf("Concluido");
+    //printf("Inicializando recebimento na porta %d\n",portReceiver);        
+    //initReceiver();
+    //printf("Concluido");
 }
 /*
 LayerSocket::LayerSocket(const LayerSocket& orig) {
@@ -34,17 +34,11 @@ void LayerSocketUDP::initReceiver() {
     serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1"); //localhost
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(portReceiver);
-/*    
-    struct sockaddr_in socket_cli_addr;
-    socket_cli_addr.sin_addr.s_addr = inet_addr("127.0.0.1"); //localhost
-    socket_cli_addr.sin_family = AF_INET;
-    socket_cli_addr.sin_port = htons(portReceiver);
-  */  
+        
     socketReceiverFD = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     int sockeReceiverBind = bind(socketReceiverFD, (struct sockaddr *) &serv_addr, sizeof(serv_addr));
     int socketReceiverListen = listen(socketReceiverFD, 20);
-    //int socketReceiverAccept = accept(socketReceiverFD, (struct sockaddr *) &socket_cli_addr, sizeof(socket_cli_addr));
-    //int socketReceiverAccept = accept(socketReceiverFD, (struct sockaddr *) NULL, NULL);
+    
 }
 
 void LayerSocketUDP::initSender() {
@@ -54,7 +48,7 @@ void LayerSocketUDP::initSender() {
     cli_addr.sin_port = htons(portSender);
         
     socketSenderFD = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-    int sockeSenderConnect = connect(socketSenderFD, (struct sockaddr *) &cli_addr, sizeof(cli_addr));
+    //int sockeSenderConnect = connect(socketSenderFD, (struct sockaddr *) &cli_addr, sizeof(cli_addr));
     printf("Concluido\n");
 }
 

@@ -9,6 +9,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -48,27 +50,27 @@ public class LayerSocket {
     }
     
     public void initSender() throws IOException{
-        System.out.println("Inicializando envio para porta "+portSender);        
+        //System.out.println("Inicializando envio para porta "+portSender);        
         
         socketSender = new Socket(InetAddress.getLocalHost(), portSender);
         socketSender.setSoTimeout(0);
-        System.out.println("Concluido");        
+        //System.out.println("Concluido");        
 
     }
     
     public String receive() throws IOException{
         
-        BufferedReader input = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        DataInputStream input = new DataInputStream(client.getInputStream());
         //BufferedReader buffer = new BufferedReader(input);
-        char[] bytes = new char[LIMIT];
+        byte[] bytes = new byte[LIMIT];
         
         int numBytes = input.read(bytes, 0, LIMIT); //bytes, 0, LIMIT);
         
         System.out.println("===============================");
         System.out.println("Recebidos "+ numBytes + " bytes na porta " + portReceiver);
         System.out.println("");
-        for(char c : bytes){
-            System.out.print((char) c);
+        for(byte b : bytes){
+            System.out.print((char) b);
         }
         
         return new String(bytes);
@@ -76,9 +78,9 @@ public class LayerSocket {
     
     public void send(String message) throws IOException{
         
-        PrintWriter output = new PrintWriter(socketSender.getOutputStream());
+        DataOutputStream output = new DataOutputStream(socketSender.getOutputStream());
         //BufferedWriter buffer = new BufferedWriter(output);
-        char[] bytes = message.toCharArray();
+        byte[] bytes = message.getBytes();
         
         output.write(bytes);
         output.flush();

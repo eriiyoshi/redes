@@ -6,6 +6,16 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/gustavo/MEGA/CEFET-MG/8o%20Período/LAB%20Redes/TPImplementacao/camadas/Transporte/TransporteCliente/LayerSocketUDP.cpp</file>
+            <file>file:/home/gustavo/MEGA/CEFET-MG/8o%20Período/LAB%20Redes/TPImplementacao/camadas/Transporte/TransporteCliente/LayerSocket.h</file>
+            <file>file:/home/gustavo/MEGA/CEFET-MG/8o%20Período/LAB%20Redes/TPImplementacao/camadas/Transporte/TransporteCliente/mainClient.cpp</file>
+            <file>file:/home/gustavo/MEGA/CEFET-MG/8o%20Período/LAB%20Redes/TPImplementacao/camadas/Transporte/TransporteCliente/LayerSocket.cpp</file>
+            <file>file:/home/gustavo/MEGA/CEFET-MG/8o%20Período/LAB%20Redes/TPImplementacao/camadas/Transporte/TransporteCliente/LayerSocketUDP.h</file>
+            <file>file:/home/gustavo/MEGA/CEFET-MG/8o%20Período/LAB%20Redes/TPImplementacao/camadas/Transporte/TransporteCliente/Layer.h</file>
+            <file>file:/home/gustavo/MEGA/CEFET-MG/8o%20Período/LAB%20Redes/TPImplementacao/camadas/Transporte/TransporteCliente/Layer.cpp</file>
+            <file>file:/home/gustavo/MEGA/CEFET-MG/8o%20Período/LAB%20Redes/TPImplementacao/camadas/Transporte/TransporteCliente/LayerSocketTCP.h</file>
+            <file>file:/home/gustavo/MEGA/CEFET-MG/8o%20Período/LAB%20Redes/TPImplementacao/camadas/Transporte/TransporteCliente/LayerSocketTCP.cpp</file>
+        </group>
     </open-files>
 </project-private>
