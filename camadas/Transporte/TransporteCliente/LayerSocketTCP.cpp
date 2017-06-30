@@ -13,7 +13,7 @@
 
 #include "LayerSocketTCP.h"
 
-int LayerSocketTCP::LIMIT = 4000;
+int LayerSocketTCP::LIMIT = 10000;
 
 LayerSocketTCP::LayerSocketTCP(int portReceiver, int portSender) {
     this->portReceiver = portReceiver;
@@ -41,7 +41,7 @@ void LayerSocketTCP::initReceiver() {
     int sockeReceiverBind = bind(socketReceiverFD, (struct sockaddr *) &serv_addr, sizeof(serv_addr));
     int socketReceiverListen = listen(socketReceiverFD, 20);
     int c = sizeof(struct sockaddr_in);
-    int socketReceiverAccept = accept(socketReceiverFD, (struct sockaddr*)&client, (socklen_t*)&c);
+    socketClient = accept(socketReceiverFD, (struct sockaddr*)&client, (socklen_t*)&c);
 }
 
 void LayerSocketTCP::initSender() {
@@ -60,13 +60,15 @@ void LayerSocketTCP::initSender() {
 
 void LayerSocketTCP::send(char* message) {
     int numBytes = ::send(socketSenderFD, message, strlen(message), 0);
-    printf("\nEnviou: %d\n", numBytes);
+    //int numBytes = ::send(socketReceiverAccept, message, strlen(message), 0);
+    //printf("\nEnviou: %d\n", numBytes);
 }
 
 int LayerSocketTCP::receive(char* buffer) {
     int addrlen = sizeof(serv_addr);
-    int new_socket = recv(socketReceiverFD, buffer, LIMIT, 0);
-    
+    //int new_socket = recv(socketReceiverFD, buffer, LIMIT, 0);
+    int new_socket = recv(socketClient, buffer, LIMIT, 0);
+    //printf("\nRecebeu: %d\n", new_socket);
     return new_socket;//read(new_socket, buffer, LIMIT);    
 }
 
@@ -77,7 +79,7 @@ void LayerSocketTCP::close(){
 
 void LayerSocket::formatMessage(int type, int sourcePort, int destinationPort, int window, char* message, char* binaryMessage){
     
-    int sequenceNumber = rand()%(1<<16);
+    int sequenceNumber = rand()%(1<<10);
     int acknowledgementNumber = sequenceNumber+24+strlen(message);
     int dataOffset = 0;
     int reserved = 0;
@@ -94,7 +96,6 @@ void LayerSocket::formatMessage(int type, int sourcePort, int destinationPort, i
     char data[10000];
     strcpy(data, message);
     
-    char datagram[500];
     char str_sourcePort[30];
     char str_destinationPort[30];
     char str_sequenceNumber[50];
@@ -132,7 +133,27 @@ void LayerSocket::formatMessage(int type, int sourcePort, int destinationPort, i
     toBin(options, 24, str_options);
     toBin(padding, 8, str_padding);
     toBin(data, str_data);
-     
+    
+    strcpy(binaryMessage, str_sourcePort);
+    strcat(binaryMessage, str_destinationPort);
+    strcat(binaryMessage, str_sequenceNumber);
+    strcat(binaryMessage, str_acknowledgementNumber);
+    strcat(binaryMessage, str_dataOffset);
+    strcat(binaryMessage, str_reserved);
+    strcat(binaryMessage, str_urg);
+    strcat(binaryMessage, str_ack);
+    strcat(binaryMessage, str_psh);
+    strcat(binaryMessage, str_rst);
+    strcat(binaryMessage, str_syn);
+    strcat(binaryMessage, str_fin);
+    strcat(binaryMessage, str_window);
+    strcat(binaryMessage, str_checksum);
+    strcat(binaryMessage, str_urgentPointer);
+    strcat(binaryMessage, str_options);
+    strcat(binaryMessage, str_padding);
+    strcat(binaryMessage, str_data);
+    
+    //printf("Verificando mensagem: \n%s", binaryMessage);
 }
 
 void LayerSocket::printMessage(char* message){
@@ -530,8 +551,10 @@ int LayerSocket::toInt(char* binary){
     int number = 0;
     for(i=0; i<strlen(binary); i++){
         if(binary[i] == '1')
-            number += (1<<i);
+            number += (1<<(strlen(binary)-1-i));
     }
+    
+    return number;
     
 }
 

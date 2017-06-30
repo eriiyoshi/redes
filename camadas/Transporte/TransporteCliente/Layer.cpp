@@ -49,7 +49,7 @@ Layer::~Layer() {
 
 void Layer::sendToOver(char* message){
     over->send(message);
-    printf("\nChegooooou");
+    //printf("\nChegooooou");
     return;
 }
 

@@ -9,7 +9,7 @@ use Exporter qw(import);
 
 our @EXPORT_OK = qw/.*/;
 
-my $LIMIT = 4000;
+my $LIMIT = 10000;
 
 sub IP2Bin {
 

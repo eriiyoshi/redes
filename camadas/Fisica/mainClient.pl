@@ -39,6 +39,8 @@ print 'Source IP: '.$layer01->getUnderIPReceiver."\n";
 print 'Destination MAC: '.$layer01->getUnderMACSender."\n";
 print 'Destination IP: '.$layer01->getUnderIPSender."\n";
 
+print "\n\n---------------------------\n\n";
+
 sleep(3);
 
 while(1){
@@ -55,7 +57,8 @@ while(1){
   Functions->printFrame($frame);
   $length = $layer01->sendToUnder($frame);
 
-  #$length = $layer01->sendToOver("Mensagem 02");
+  $buffer = $layer01->receiveFromUnder();
+  $length = $layer01->sendToOver($buffer);
 
 }
 $layer01->close();

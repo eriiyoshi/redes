@@ -47,6 +47,7 @@ protected:
     
     int socketReceiverFD;
     int socketSenderFD;
+    int socketClient;
     
     static void toBin(int number, int num_bits, char* binary);
     static void toBin(char* data, char* binary);

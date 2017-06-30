@@ -86,15 +86,16 @@ public class MainServer {
                 }
             }
 
-            char[] content = new char[4000];
+            char[] content = new char[10000];
             FileReader fileReader = new FileReader(file);
 
-            int nBytes = fileReader.read(content, 0, 4000);
+            int nBytes = fileReader.read(content, 0, 10000);
             fileReader.close();
 
             String pageContent = new String(content);
 
-            System.out.println("Enviando mensagem");
+            System.out.println("Enviando mensagem:");
+            System.out.println(pageContent);
             layer02.sendToUnder(pageContent);
 
             System.out.println("Mensagem enviada");

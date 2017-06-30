@@ -35,7 +35,7 @@ public class LayerSocket {
     private int portSender;
     private int portReceiver;
     
-    private static int LIMIT = 4000;
+    private static int LIMIT = 10000;
     
     public LayerSocket(int portReceiver, int portSender) throws IOException{
         this.portReceiver = portReceiver;

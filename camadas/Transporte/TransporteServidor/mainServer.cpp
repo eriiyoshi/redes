@@ -59,23 +59,32 @@ int main(int argc, char** argv) {
     layer02->initUnderSender();
     printf("\nConcluido");
     
-    char bufferAux[10000];
+    //-------------------------------------------------------------------
+
+    printf("\n\n----------------------------------------\n\n");
+    
+    char bufferAux[LayerSocketTCP::LIMIT];
     
     layer02->receiveFromUnder(bufferAux);
+    printf("\n\nMensagem Recebida:\n");
+    layer02->getUnder()->printMessage(bufferAux);
+    char mensagem[LayerSocketTCP::LIMIT];
     
-    char mensagem[10000];
-    
+    printf("\n\nEnviando ACK:\n");
     // ACK
     layer02->getUnder()->formatMessage(2, layer02->getUnderPortSender(), layer02->getUnderPortSender(), windowSize, "", mensagem);
     // TODO: Tratar falha no envio
+    layer02->getUnder()->printMessage(mensagem);
     layer02->sendToUnder(mensagem);
    
+    printf("\n\nMensagem Recebida:\n");
     strcpy(buffer, "");
     // Mensagem
     // TODO: Dividir de acordo com window
     layer02->receiveFromUnder(bufferAux);
     layer02->getUnder()->printMessage(bufferAux);
     
+    printf("\n\nEnviando ACK:\n");
     // ACK
     layer02->getUnder()->formatMessage(0, layer02->getUnderPortSender(), layer02->getUnderPortSender(), 512, "", mensagem);
     layer02->getUnder()->printMessage(mensagem);
@@ -85,6 +94,8 @@ int main(int argc, char** argv) {
     layer02->getUnder()->getDataFromMessage(mensagem, bufferAux);
     strcat(buffer, bufferAux);
 
+    printf("\n\nEnviando para aplicação:\n");
+    printf("%s", buffer);
     layer02->sendToOver(buffer);
     /*
     printf("\nMAIN->Recebido: %s", buffer);
