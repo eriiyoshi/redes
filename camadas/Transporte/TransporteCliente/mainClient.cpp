@@ -95,27 +95,37 @@ int main(int argc, char** argv) {
     // Mensagem
     // TODO: Dividir de acordo com window
     char binary[LayerSocketTCP::LIMIT];
+    char mensagem2[LayerSocketTCP::LIMIT];
     LayerSocket::toBin(buffer, binary);
-    layer01->getUnder()->formatMessage(0, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, binary, mensagem);
+    layer01->getUnder()->formatMessage(0, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, binary, mensagem2);
     //layer01->getUnder()->formatMessage(0, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, buffer, mensagem);
     // TODO: Tratar falha no envio    
-    layer01->sendToUnder(mensagem);
+    layer01->sendToUnder(mensagem2);
     
     printf("\n\nMensagem Recebida:\n");
     // ACK
     layer01->receiveFromUnder(bufferAux);
     layer01->getUnder()->printMessage(bufferAux);
     
+// TODO: ENVIAR ACK PARA SERVIDOR
+    // ACK
+    layer01->getUnder()->formatMessage(2, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, "", mensagem);
+    layer01->getUnder()->printMessage(mensagem);
+    // TODO: Tratar falha no envio
+    layer01->sendToUnder(mensagem);
+   
     printf("\n\nMensagem Recebida:\n");
     // Recebimento
     // Mensagem
-    layer01->receiveFromUnder(buffer);
-    layer01->getUnder()->printMessage(buffer);
+    char buffer157[LayerSocketTCP::LIMIT];
+    layer01->receiveFromUnder(buffer157);
+    printf("\n\n\n\nHOJE EU SOU LADRAO: %s\n\n\n\n", buffer157);
+    layer01->getUnder()->printMessage(buffer157);
 
     printf("\n\nEnviando para aplicação:\n");
     char data[LayerSocketTCP::LIMIT];
-    layer01->getUnder()->getDataFromMessage(buffer, binary);
-    LayerSocket::toChar(binary, data);
+    //layer01->getUnder()->getDataFromMessage(buffer157, binary);
+    LayerSocket::toChar(buffer157, data);
     printf("%s", data);
     layer01->sendToOver(data);
     

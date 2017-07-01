@@ -96,7 +96,7 @@ public class MainClient {
             System.out.println("Aguardando dados do cliente");
 
             String pageContent = layer01.receiveFromUnder();
-
+            System.out.println("BEYBLADONA GIGANTESCA DO BRASIL: "+pageContent);
             FileWriter fileWriter = new FileWriter("client.html");
             fileWriter.write(pageContent);
             fileWriter.close();

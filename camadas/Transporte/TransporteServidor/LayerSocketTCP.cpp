@@ -505,6 +505,7 @@ void LayerSocket::getDataFromMessage(char* message, char* data){
     
     strcpy(str_data, "");
     //for(int i=192; i<224; i++){
+    printf("\n\n\n\nBEYBLADE: %d\n\n\n\n", strlen(message));
     for(int i=192; i<strlen(message); i++){
         char aux[2];
         aux[0] = message[i];

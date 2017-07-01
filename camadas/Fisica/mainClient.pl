@@ -61,6 +61,7 @@ while(1){
 
   $buffer = $layer01->receiveFromUnder();
   $buffer = Functions->getDataFromFrame($buffer);
+  print "BUFFER TESTE: ".$buffer."\n";
   $length = $layer01->sendToOver($buffer);
 
 }

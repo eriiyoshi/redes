@@ -94,8 +94,9 @@ int main(int argc, char** argv) {
     // TODO: Tratar falha no envio    
     layer02->sendToUnder(mensagem);
     
-    layer02->getUnder()->getDataFromMessage(mensagem, bufferAux);
-    strcat(buffer, bufferAux);
+    char bufferAux2[LayerSocketTCP::LIMIT];
+    layer02->getUnder()->getDataFromMessage(bufferAux, bufferAux2);
+    strcat(buffer, bufferAux2);
 
     printf("\n\nEnviando para aplicação:\n");
     char bufferChar[LayerSocketTCP::LIMIT];
@@ -105,16 +106,22 @@ int main(int argc, char** argv) {
     printf("\n%s", bufferChar);
     layer02->sendToOver(bufferChar);
     
+    char buffer3[LayerSocketTCP::LIMIT];
     printf("\n\nMensagem Recebida:\n");
     strcpy(buffer, "");
     printf("%s", buffer);
-    layer02->receiveFromOver(buffer);
+    layer02->receiveFromOver(buffer3);
+    
+    printf("\n\n\n\nJORDAO, TE LIGAM: %s\n\n\n\n", buffer3);
     
     strcpy(mensagem, "");
     printf("\n\nEnviando para física :\n");
-    layer02->getUnder()->formatMessage(2, layer02->getUnderPortSender(), layer02->getUnderPortSender(), windowSize, buffer, mensagem);
-    layer02->getUnder()->printMessage(mensagem);
-    layer02->sendToUnder(mensagem);
+    char buffer_2[LayerSocketTCP::LIMIT];
+    char buffer4[LayerSocketTCP::LIMIT];
+    LayerSocketTCP::toBin(buffer3, buffer_2);
+    layer02->getUnder()->formatMessage(0, layer02->getUnderPortSender(), layer02->getUnderPortSender(), windowSize, buffer_2, buffer4); //0 Mensagem -> 1 SYN -> 2 ACk
+    layer02->getUnder()->printMessage(buffer4);
+    layer02->sendToUnder(buffer4);
     /*
     printf("\nMAIN->Recebido: %s", buffer);
     sprintf(buffer, "");
