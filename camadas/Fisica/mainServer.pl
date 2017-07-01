@@ -1,6 +1,8 @@
 use Layer;
 use Functions;
 
+print "\nFísica - Servidor\n";
+
 my $length;
 my $buffer;
 
@@ -51,9 +53,14 @@ while(1){
   $layer02->sendToOver($buffer);
 
   $buffer = $layer02->receiveFromOver();
-  Functions->printFrame($buffer); # printPacket
-  $buffer = "TIRIÇA"; # fromPacket
-  $layer02->sendToUnder($buffer);
+  my $frame = Functions->createFrame(
+      $buffer,
+      $layer02->getUnderMACSender,
+      $layer02->getUnderMACReceiver
+  );
+  Functions->printFrame($frame); # printPacket
+  # $buffer = "TIRIÇA"; # fromPacket
+  $layer02->sendToUnder($frame);
 
 }
 $layer02->close();

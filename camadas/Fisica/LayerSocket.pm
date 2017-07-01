@@ -22,7 +22,7 @@ my $socketSender;
 
 my $socketClient;
 
-my $LIMIT = 10000;
+my $LIMIT = 50000;
 
 sub new() {
         my $type = $_[0];

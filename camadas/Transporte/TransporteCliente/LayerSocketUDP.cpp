@@ -13,7 +13,7 @@
 
 #include "LayerSocketUDP.h"
 
-int LayerSocketUDP::LIMIT = 4000;
+int LayerSocketUDP::LIMIT = 50000;
 
 LayerSocketUDP::LayerSocketUDP(int portReceiver, int portSender) {
     this->portReceiver = portReceiver;

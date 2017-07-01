@@ -13,7 +13,7 @@
 
 #include "LayerSocketTCP.h"
 
-int LayerSocketTCP::LIMIT = 10000;
+int LayerSocketTCP::LIMIT = 50000;
 
 LayerSocketTCP::LayerSocketTCP(int portReceiver, int portSender) {
     this->portReceiver = portReceiver;
@@ -93,7 +93,7 @@ void LayerSocket::formatMessage(int type, int sourcePort, int destinationPort, i
     int urgentPointer = 0;
     int options = 0;
     int padding = 0;
-    char data[10000];
+    char data[50000];
     strcpy(data, message);
     
     char datagram[500];
@@ -114,7 +114,7 @@ void LayerSocket::formatMessage(int type, int sourcePort, int destinationPort, i
     char str_urgentPointer[30];
     char str_options[30];
     char str_padding[10];
-    char str_data[10000];
+    char str_data[50000];
     
     toBin(sourcePort, 16, str_sourcePort);
     toBin(destinationPort, 16, str_destinationPort);
@@ -133,7 +133,8 @@ void LayerSocket::formatMessage(int type, int sourcePort, int destinationPort, i
     toBin(urgentPointer, 16, str_urgentPointer);
     toBin(options, 24, str_options);
     toBin(padding, 8, str_padding);
-    toBin(data, str_data);
+    //toBin(data, str_data);
+    strcpy(str_data, data);
     
     strcpy(binaryMessage, str_sourcePort);
     strcat(binaryMessage, str_destinationPort);
@@ -176,7 +177,7 @@ void LayerSocket::printMessage(char* message){
     char str_urgentPointer[30];
     char str_options[30];
     char str_padding[10];
-    char str_data[10000];
+    char str_data[50000];
     
     strcpy(str_sourcePort, "");
     for(int i=0; i<16; i++){
@@ -331,15 +332,16 @@ void LayerSocket::printMessage(char* message){
     }
     printf("\nPadding: %d", toInt(str_padding));
     
-    strcpy(str_data, "");
+    /*strcpy(str_data, "");
     for(int i=192; i<224; i++){
         char aux[2];
         aux[0] = message[i];
         aux[1] = '\0';
         strcat(str_data, aux);
-    }
-    char data[10000];
-    toChar(str_data, data);
+    }*/
+    char data[50000];
+    //toChar(str_data, data);
+    strcpy(data, str_data);
     printf("\nData: %s", data);
     
 }
@@ -363,7 +365,7 @@ void LayerSocket::getDataFromMessage(char* message, char* data){
     char str_urgentPointer[30];
     char str_options[30];
     char str_padding[10];
-    char str_data[10000];
+    char str_data[50000];
     
     strcpy(str_sourcePort, "");
     for(int i=0; i<16; i++){
@@ -502,14 +504,15 @@ void LayerSocket::getDataFromMessage(char* message, char* data){
     }
     
     strcpy(str_data, "");
-    for(int i=192; i<224; i++){
+    //for(int i=192; i<224; i++){
+    for(int i=192; i<strlen(message); i++){
         char aux[2];
         aux[0] = message[i];
         aux[1] = '\0';
         strcat(str_data, aux);
     }
-    toChar(str_data, data);
-    
+    //toChar(str_data, data);
+    strcpy(data, str_data);
 }
 
 void LayerSocket::toBin(int number, int num_bits, char* binary){

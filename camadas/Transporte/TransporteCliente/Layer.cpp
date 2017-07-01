@@ -15,7 +15,7 @@
 
 int Layer::TCP = 1;
 int Layer::UDP = 2;
-int Layer::LIMIT = 4000;
+int Layer::LIMIT = 50000;
 
 Layer::Layer(int tcp1udp2, int underPortReceiver, int underPortSender, int overPortReceiver, int overPortSender) {
     this->underPortSender = underPortSender;

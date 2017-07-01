@@ -36,8 +36,15 @@ public:
     virtual void formatMessage(int type, int sourcePort, int destinationPort, int window, char* message, char* binaryMessage);
     virtual void printMessage(char* message);
     virtual void getDataFromMessage(char* message, char* data);
-
+    
+    static void toBin(int number, int num_bits, char* binary);
+    static void toBin(char* data, char* binary);
+    static int toInt(char* binary);
+    static void toChar(char* binary, char* str);
+    
     static int LIMIT;
+    
+    
 protected:
     int portSender;
     int portReceiver;
@@ -48,11 +55,6 @@ protected:
     int socketReceiverFD;
     int socketSenderFD;
     int socketClient;
-    
-    static void toBin(int number, int num_bits, char* binary);
-    static void toBin(char* data, char* binary);
-    static int toInt(char* binary);
-    static void toChar(char* binary, char* str);
             
 };
 

@@ -9,7 +9,7 @@ use Exporter qw(import);
 
 our @EXPORT_OK = qw/.*/;
 
-my $LIMIT = 10000;
+my $LIMIT = 50000;
 
 sub IP2Bin {
 
@@ -146,7 +146,7 @@ sub printFrame {
 	my $destinationMAC = Bin2MAC(substr $frame, 64, 48);
 	my $sourceMAC = Bin2MAC(substr $frame, 112, 48);
 	my $etherType = Bin2Dec(substr $frame, 160, 16);
-	my $data = Bin2Asc(substr $frame, 176, $dataLength);
+	my $data = substr $frame, 176, $dataLength; # Bin2Asc(substr $frame, 176, $dataLength);
 	my $fcs = Bin2Dec(substr $frame, 176+$dataLength, 32);
 
 	print "\n";
@@ -172,7 +172,7 @@ sub createFrame {
 	my $destinationMAC = MAC2Bin($dMAC);
 	my $sourceMAC = MAC2Bin($sMAC);
 	my $etherType = Dec2Bin($dataLength, 16);
-	my $data = Asc2Bin($dataFrame);
+	my $data = $dataFrame; # Asc2Bin($dataFrame);
 	my $fcs = '00000000000000000000000000000000';
 
   my $frame = $preamble.$destinationMAC.$sourceMAC.$etherType.$data.$fcs;
@@ -188,7 +188,7 @@ sub getDataFromFrame {
 	my $destinationMAC = Bin2MAC(substr $frame, 64, 48);
 	my $sourceMAC = Bin2MAC(substr $frame, 112, 48);
 	my $etherType = Bin2Dec(substr $frame, 160, 16);
-	my $data = Bin2Asc(substr $frame, 176, $dataLength);
+	my $data = substr $frame, 176, $dataLength; # Bin2Asc(substr $frame, 176, $dataLength);
 	my $fcs = Bin2Dec(substr $frame, 176+$dataLength, 32);
 
 	return $data;

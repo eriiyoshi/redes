@@ -41,7 +41,9 @@ public class MainServer {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-
+        
+        System.out.println("Aplicação - Servidor");
+        
         Layer layer02 = null;
 
         try {
@@ -78,25 +80,32 @@ public class MainServer {
 
             String[] strs = message.split(" ");
 
-            String file = "index.html";
+            String file = "Aplicacao/index.html";
 
-            if (strs != null && strs.length > 2) {
+            /*if (strs != null && strs.length > 2) {
                 if (strs[0].equals("GET")) {
-                    file = strs[1].replaceAll("/", "");
+                    file = "Aplicacao/" + strs[1].replaceAll("/", "");
                 }
-            }
+            }*/
 
-            char[] content = new char[10000];
+            char[] content = new char[50000];
             FileReader fileReader = new FileReader(file);
 
-            int nBytes = fileReader.read(content, 0, 10000);
+            int nBytes = fileReader.read(content, 0, 50000);
             fileReader.close();
-
-            String pageContent = new String(content);
-
+            
+            StringBuilder strBuilder = new StringBuilder();
+            for(int i=0; i<nBytes; i++){
+                strBuilder.append(content[i]);
+            }
+            String pageContent = strBuilder.toString();
+            strBuilder = new StringBuilder("");           
+            
             System.out.println("Enviando mensagem:");
             System.out.println(pageContent);
             layer02.sendToUnder(pageContent);
+            //System.out.println(LayerSocket.toBin(pageContent));
+            //layer02.sendToUnder(LayerSocket.toBin(pageContent));
 
             System.out.println("Mensagem enviada");
             System.out.println("");

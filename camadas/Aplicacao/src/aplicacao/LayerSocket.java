@@ -35,7 +35,7 @@ public class LayerSocket {
     private int portSender;
     private int portReceiver;
     
-    private static int LIMIT = 10000;
+    private static int LIMIT = 50000;
     
     public LayerSocket(int portReceiver, int portSender) throws IOException{
         this.portReceiver = portReceiver;
@@ -69,11 +69,16 @@ public class LayerSocket {
         System.out.println("===============================");
         System.out.println("Recebidos "+ numBytes + " bytes na porta " + portReceiver);
         System.out.println("");
-        for(byte b : bytes){
-            System.out.print((char) b);
+        
+        StringBuilder strBuilder = new StringBuilder();
+        
+        for(int i=0; i<numBytes; i++){
+            strBuilder.append((char) bytes[i]);
         }
         
-        return new String(bytes);
+        System.out.println(strBuilder.toString());
+        
+        return strBuilder.toString();
     }
     
     public void send(String message) throws IOException{
@@ -95,6 +100,32 @@ public class LayerSocket {
             socketSender.close();
         if(socketReceiver != null)
             socketReceiver.close();    
+    }
+    
+    public static String toBin(String str){
+        StringBuilder builder = new StringBuilder();
+        for(char c : str.toCharArray()){
+            builder.append(
+                String.format("%08d", Integer.valueOf(Integer.toBinaryString((int) c)))
+            );
+        }
+        
+        return builder.toString();
+    }
+    
+    public static String toChar(String str){
+        StringBuilder builder = new StringBuilder();
+        
+        for(int i=0; i<str.length()/8; i++){
+            int sum = 0;
+            for(int j=0; j<8; j++){
+                if(str.charAt(8*i+j) == '1')
+                    sum += 1<<(7-j);
+            }
+            builder.append((char) sum);
+        }
+      
+        return builder.toString();
     }
     
 }

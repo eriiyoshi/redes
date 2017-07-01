@@ -22,6 +22,8 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
+    printf("\nTransporte - Cliente\n");
+    
     char buffer[LayerSocketTCP::LIMIT];
     char buffer2[LayerSocketTCP::LIMIT];
     int numBytes = 0;
@@ -85,13 +87,17 @@ int main(int argc, char** argv) {
     printf("\n\nMensagem Recebida:\n");
     // SYN-ACK
     layer01->receiveFromUnder(bufferAux);
+    printf("defeito:%s", bufferAux);
     layer01->getUnder()->printMessage(bufferAux);
     
     printf("\n\nEnviando Mensagem:\n");
     // Envio
     // Mensagem
     // TODO: Dividir de acordo com window
-    layer01->getUnder()->formatMessage(0, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, buffer, mensagem);
+    char binary[LayerSocketTCP::LIMIT];
+    LayerSocket::toBin(buffer, binary);
+    layer01->getUnder()->formatMessage(0, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, binary, mensagem);
+    //layer01->getUnder()->formatMessage(0, layer01->getUnderPortSender(), layer01->getUnderPortSender(), 512, buffer, mensagem);
     // TODO: Tratar falha no envio    
     layer01->sendToUnder(mensagem);
     
@@ -108,7 +114,8 @@ int main(int argc, char** argv) {
 
     printf("\n\nEnviando para aplicação:\n");
     char data[LayerSocketTCP::LIMIT];
-    layer01->getUnder()->getDataFromMessage(buffer, data);
+    layer01->getUnder()->getDataFromMessage(buffer, binary);
+    LayerSocket::toChar(binary, data);
     printf("%s", data);
     layer01->sendToOver(data);
     

@@ -22,6 +22,8 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
+    printf("\nTransporte - Servidor\n");
+    
     char buffer[LayerSocketTCP::LIMIT];
     char buffer2[LayerSocketTCP::LIMIT];
     int numBytes = 0;
@@ -67,6 +69,7 @@ int main(int argc, char** argv) {
     
     layer02->receiveFromUnder(bufferAux);
     printf("\n\nMensagem Recebida:\n");
+    printf("defeito2: %s", bufferAux);
     layer02->getUnder()->printMessage(bufferAux);
     char mensagem[LayerSocketTCP::LIMIT];
     
@@ -95,8 +98,23 @@ int main(int argc, char** argv) {
     strcat(buffer, bufferAux);
 
     printf("\n\nEnviando para aplicação:\n");
+    char bufferChar[LayerSocketTCP::LIMIT];
+    LayerSocket::toChar(buffer, bufferChar);
+    printf("%s", mensagem);
+    printf("\n%s", buffer);
+    printf("\n%s", bufferChar);
+    layer02->sendToOver(bufferChar);
+    
+    printf("\n\nMensagem Recebida:\n");
+    strcpy(buffer, "");
     printf("%s", buffer);
-    layer02->sendToOver(buffer);
+    layer02->receiveFromOver(buffer);
+    
+    strcpy(mensagem, "");
+    printf("\n\nEnviando para física :\n");
+    layer02->getUnder()->formatMessage(2, layer02->getUnderPortSender(), layer02->getUnderPortSender(), windowSize, buffer, mensagem);
+    layer02->getUnder()->printMessage(mensagem);
+    layer02->sendToUnder(mensagem);
     /*
     printf("\nMAIN->Recebido: %s", buffer);
     sprintf(buffer, "");

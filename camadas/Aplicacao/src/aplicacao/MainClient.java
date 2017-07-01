@@ -43,6 +43,8 @@ public class MainClient {
     public static void main(String[] args) {
         // TODO code application logic here
 
+        System.out.println("Aplicação - Cliente");
+        
         Layer layer01 = null;
 
         try {
@@ -58,8 +60,6 @@ public class MainClient {
                 overPortSender = Integer.valueOf(args[3]);
             }
             
-            System.out.println("Aplicação - Cliente");
-
             //layer01 = new Layer(8007, 8006, 8008, 8008);
             layer01 = new Layer(underPortReceiver, underPortSender, overPortReceiver, overPortSender);
                         
@@ -81,14 +81,15 @@ public class MainClient {
             System.out.println(browser);
 
             //while(true){
-            String request = "GET /index.html HTTP/1.1\n"
+            /*String request = "GET /index.html HTTP/1.1\n"
                     + "User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3\n"
                     + "Host: localhost\n"
                     + "Accept-Language: en, pt";
+            */
 
             System.out.println("");
             System.out.println("Enviando mensagem");
-            layer01.sendToUnder(request);
+            layer01.sendToUnder(browser);
 
             System.out.println("Mensagem enviada");
 

@@ -1,6 +1,8 @@
 use Layer;
 use Functions;
 
+print "\nFísica - Cliente\n";
+
 my $length;
 my $buffer;
 
@@ -58,6 +60,7 @@ while(1){
   $length = $layer01->sendToUnder($frame);
 
   $buffer = $layer01->receiveFromUnder();
+  $buffer = Functions->getDataFromFrame($buffer);
   $length = $layer01->sendToOver($buffer);
 
 }
